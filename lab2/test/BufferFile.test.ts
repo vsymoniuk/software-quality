@@ -1,5 +1,5 @@
-import { Directory } from './../src/Directory';
-import { BufferFile } from './../src/BufferFile';
+import { Directory } from '../src/Directory';
+import { BufferFile } from '../src/BufferFile';
 
 describe('Buffer file', () => {
   const OLD_ENV = process.env;
@@ -15,28 +15,34 @@ describe('Buffer file', () => {
     process.env = OLD_ENV;
   });
 
-  const rootDir = new Directory(null, 'root');
+  const filename = 'filename';
+  let rootDir = null;
+
+  beforeEach(() => {
+    rootDir = new Directory(null, 'root');
+  });
 
   test('should be successfully created', () => {
     expect(() => new BufferFile(rootDir)).not.toThrowError();
   });
 
-  const filename = 'filename';
-  const bf = new BufferFile(rootDir, filename);
-
   test('should have a proper filename', () => {
+    const bf = new BufferFile(rootDir, filename);
     expect(bf.name).toBe(filename);
   });
 
   test('should have a proper parent', () => {
+    const bf = new BufferFile(rootDir, filename);
     expect(bf.parent).toBe(rootDir);
   });
 
   test('reading data from the empty buffer', () => {
+    const bf = new BufferFile(rootDir, filename);
     expect(() => bf.content).toThrowError();
   });
 
   test('buffer should work like a queue', function() {
+    const bf = new BufferFile(rootDir, filename);
     bf.push({ test: 'test' });
     bf.push(['a', 'b', 'c']);
 
@@ -49,6 +55,7 @@ describe('Buffer file', () => {
   });
 
   test('overflowing the buffer', () => {
+    const bf = new BufferFile(rootDir, filename);
     expect(() => {
       bf.push(18);
       bf.push([{}, 'a']);

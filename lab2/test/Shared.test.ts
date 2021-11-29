@@ -1,8 +1,13 @@
-import { Directory } from './../src/Directory';
-import { BinaryFile } from './../src/BinaryFile';
+import { Directory } from '../src/Directory';
+import { BinaryFile } from '../src/BinaryFile';
 
 describe('Shared', () => {
-  const rootDir = new Directory(null, 'root');
+  const filename = 'filename';
+  let rootDir = null;
+
+  beforeEach(() => {
+    rootDir = new Directory(null, 'root');
+  });
 
   test('file deletion', () => {
     const bf = new BinaryFile(rootDir, 'file1');
@@ -13,8 +18,6 @@ describe('Shared', () => {
   });
 
   test('create same file in same dir', () => {
-    const filename = 'filename';
-
     expect(() => {
       new BinaryFile(rootDir, filename);
       new BinaryFile(rootDir, filename);

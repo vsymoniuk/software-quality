@@ -7,7 +7,7 @@ module.exports = {
 	},
 	moduleFileExtensions: [
 		'ts',
-		'js', 
+		'js',
 		'json'
 	],
 	transform: {
@@ -17,4 +17,8 @@ module.exports = {
 		'**/test/**/*.test.(ts|js)'
 	],
 	testEnvironment: 'node',
+	collectCoverage: true,
+  collectCoverageFrom: [
+    './test/**'
+  ],
 };
