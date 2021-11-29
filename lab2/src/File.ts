@@ -12,6 +12,10 @@ export class File {
     if (!name) {
       this.name = `file_${Date.now()}`;
     }
+
+    if (parent) {
+      parent.files.push(this);
+    }
   }
 
   public delete(): void {
